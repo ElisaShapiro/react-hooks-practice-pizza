@@ -1,13 +1,19 @@
 import React from "react";
 
-function Pizza({ pizza }) {
+function Pizza({ pizza, setEditPizza }) {
+  const { topping, size, vegetarian } = pizza //destructure - helps the patch 
+  
+  function handleClickEdit() {
+    setEditPizza(pizza)
+  }
+
   return (
     <tr>
-      <td>{pizza.topping}</td>
-      <td>{pizza.size}</td>
-      <td>{pizza.vegetarian ? "Vegetarian" : "Not vegetarian"}</td>
+      <td>{topping}</td>
+      <td>{size}</td>
+      <td>{vegetarian ? "Vegetarian" : "Not vegetarian"}</td>
       <td>
-        <button type="button" className="btn btn-primary">
+        <button onClick={handleClickEdit} type="button" className="btn btn-primary">
           Edit Pizza
         </button>
       </td>
