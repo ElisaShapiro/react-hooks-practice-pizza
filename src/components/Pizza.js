@@ -5,7 +5,7 @@ function Pizza({ pizza, setEditPizza }) {
   
   function handleClickEdit() {
     setEditPizza(pizza)
-  }
+  } //click edit button to populate form area with current info of selected pizza to be edited
 
   return (
     <tr>

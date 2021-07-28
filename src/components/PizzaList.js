@@ -4,7 +4,7 @@ import Pizza from "./Pizza";
 function PizzaList({ pizzas, setEditPizza }) {
   const pizzaDisplay = pizzas.map((pizza) => {
     return <Pizza key={pizza.id} pizza={pizza} setEditPizza={setEditPizza}/>
-  })
+  }) //map outside and create card in a variable then put that into table
   return (
     <table className="table table-striped">
       <thead>
@@ -16,7 +16,7 @@ function PizzaList({ pizzas, setEditPizza }) {
         </tr>
       </thead>
       <tbody>
-        {pizzaDisplay}
+        {pizzaDisplay} 
       </tbody>
     </table>
   );

@@ -5,12 +5,12 @@ import PizzaList from "./PizzaList";
 
 function App() {
   const [pizzas, setPizzas] = useState([])
-  const [editPizza, setEditPizza] = useState(null)
+  const [editPizza, setEditPizza] = useState(null) //for editing form
 
   useEffect(() => {
     fetch("http://localhost:3001/pizzas")
     .then(response => response.json())
-    .then(setPizzas)
+    .then(setPizzas) //setPizzas with current data
   }, []);
 
   function handleFormChange(name, value) {
@@ -20,20 +20,23 @@ function App() {
     }); //set key value pair for form data
   }
   function handleEditPizza(updatedPizza){
-    const updatedPizzas = pizzas.map((pizza) => pizza.id === updatedPizza.id ? updatedPizza : pizza)
-    setEditPizza(updatedPizza)
-    setPizzas(updatedPizzas)
+    const updatedPizzas = pizzas.map((pizza) => pizza.id === updatedPizza.id ? updatedPizza : pizza) //map through pizzas only change updated id rest stay the same
+    setEditPizza(updatedPizza) //only changing state of updated pizza
+    setPizzas(updatedPizzas)  //set all pizzas state to match updated pizzas variable
   }
 
   return (
     <>
       <Header />
       <PizzaForm 
-        pizza={editPizza} 
+        pizza={editPizza} //this pizza is edit form pizza
         handleFormChange={handleFormChange} 
         handleEditPizza={handleEditPizza} 
       />
-      <PizzaList pizzas={pizzas} setEditPizza={setEditPizza}/>
+      <PizzaList 
+        pizzas={pizzas} 
+        setEditPizza={setEditPizza}
+      />
     </>
   );
 }

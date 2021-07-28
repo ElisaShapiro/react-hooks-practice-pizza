@@ -1,16 +1,19 @@
 import React from "react";
 
 function PizzaForm({ pizza, handleFormChange, handleEditPizza }) {
+  //this pizza is the editPizza state from App.js
   function handleInputs(e) {
     handleFormChange(e.target.name, e.target.value)
   }
+  //e.targets are input for text topping and dropdown size
   function handleRadioChange(e){
     handleFormChange(e.target.name, e.target.value === "Vegetarian")
   }
+  //separate one for radio input
 
  function handleFormSubmit(e){
     e.preventDefault()
-    fetch(`http://localhost:3001/pizzas${pizza.id}`, {
+    fetch(`http://localhost:3001/pizzas/${pizza.id}`, { //don't forget / and pizza.id for interpolation
       method: "PATCH",
       headers: {
         "Content-Type" : "application/json"
@@ -18,13 +21,13 @@ function PizzaForm({ pizza, handleFormChange, handleEditPizza }) {
       body: JSON.stringify(pizza),
     })
     .then(response => response.json())
-    .then(handleEditPizza)
+    .then(handleEditPizza) //setPizzas with updated Pizza data via the function 
   }
   
-  if(!pizza) return null;
-  const { topping, size, vegetarian } = pizza
+  if(!pizza) return null; //if not editing no form? 
+  const { topping, size, vegetarian } = pizza //need to destructure here for form values
   
-
+  //submit event on form itself, each input has an onChange and added default value. vegetarian is boolean.
   return (
     <form onSubmit={handleFormSubmit}>
       <div className="form-row">
